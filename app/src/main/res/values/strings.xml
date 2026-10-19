@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_activity_second">SecondActivity</string>
+    <string name="app_list_title">Приложения</string>
+
+    <string name="category_game">Игры</string>
+    <string name="category_social">Социальные сети</string>
+    <string name="category_productivity">Производительность</string>
+    <string name="category_education">Образование</string>
+    <string name="category_music">Музыка</string>
+    <string name="category_photography">Фотография</string>
+    <string name="category_health">Здоровье</string>
+    <string name="category_finance">Финансы</string>
+    <string name="category_travel">Путешествия</string>
+    <string name="category_utilities">Утилиты</string>
 </resources>
