@@ -1,0 +1,35 @@
+package org.valy.myapplication.data.appdetails
+
+import org.valy.myapplication.data.appdetails.local.AppDetailsDao
+import org.valy.myapplication.data.appdetails.local.AppDetailsEntityMapper
+import org.valy.myapplication.domain.appdetails.AppDetails
+import org.valy.myapplication.domain.appdetails.AppDetailsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+class AppDetailsRepositoryImpl @Inject constructor(
+    private val appApi: AppApi,
+    private val dao: AppDetailsDao,
+    private val mapper: AppDetailsMapper,
+    private val entityMapper: AppDetailsEntityMapper,
+) : AppDetailsRepository {
+
+    override suspend fun getAppDetails(id: String): Flow<AppDetails> {
+        return dao.getAppDetails(id).map { entity ->
+            if (entity != null) {
+                entityMapper.toDomain(entity)
+            } else {
+                val dto = appApi.getAppDetails(id)
+                val domain = mapper.toDomain(dto)
+                val entity = entityMapper.toEntity(domain)
+                withContext(Dispatchers.IO) {
+                    dao.insertAppDetails(entity)
+                }
+                domain
+            }
+        }
+    }
+}
