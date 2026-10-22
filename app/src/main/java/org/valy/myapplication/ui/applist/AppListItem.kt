@@ -28,6 +28,7 @@ import org.valy.myapplication.data.AppsDataSource
 import org.valy.myapplication.model.AppInfo
 import org.valy.myapplication.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.clickable
+import org.valy.myapplication.ui.appdetails.AppDetailsScreen
 
 
 @Composable
@@ -39,9 +40,6 @@ fun AppListItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
-            .clickable {
-                println("Row нажат")
-            }
             .padding(horizontal = 16.dp, vertical = 12.dp),
 
     ) {
